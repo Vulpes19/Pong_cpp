@@ -27,10 +27,10 @@ DEL = rm -f
 all: $(TARGET)
 
 %.o: %.c
-	g++ $(FLAGS) -c -I $(INCLUDE) -I $(SDL_INCLUDE) -L $(LIB) $(TFF) $(TFFF) $(SDL) $< -o $@
+	g++ $(FLAGS) -c -I $(INCLUDE) -I $(SDL_INCLUDE) -L $(LIB) $(TFFF) $(SDL) $< -o $@
 
 $(TARGET): $(OBJS) $(INCLUDE)
-	g++ $(FLAGS) -I $(INCLUDE) -I $(SDL_INCLUDE) -L $(LIB) $(OBJS) $(TFF) $(TFFF) $(SDL) -o $(TARGET)
+	g++ $(FLAGS) -I $(INCLUDE) -I $(SDL_INCLUDE) -L $(LIB) $(OBJS) $(TFFF) $(SDL) -o $(TARGET)
 
 re: fclean all
 
