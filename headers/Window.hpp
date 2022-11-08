@@ -3,6 +3,9 @@
 
 #include <iostream>
 #include <SDL.h>
+#include <SDL_ttf.h>
+#include "Player.hpp"
+#include "Enemy.hpp"
 
 class Window
 {
@@ -11,9 +14,13 @@ class Window
 		~Window( void );
 		int		createWindow( void );
 		void	handleEvents( void );
+		void	gameLoop( void );
+		void	render( void );
 	private:
 		SDL_Window		*window;
 		SDL_Renderer	*renderer;
+		Player			player;
+		Enemy			enemy;
 		bool			running;
 		SDL_Event		event;
 		unsigned int	width;

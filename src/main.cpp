@@ -4,9 +4,11 @@
 #include <iostream>
 #include <limits.h>
 
-int main(int ac, char** av)
+int main( int ac, char **av )
 {
-	Window	window(600, 900);
+	(void)av;
+	(void)ac;
+	Window	window(1240, 900);
 
 	window.createWindow();
 	return 0;

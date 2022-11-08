@@ -34,27 +34,51 @@ int    Window::createWindow( void )
 		return (EXIT_FAILURE);
 	}
 	running = true;
-	handleEvents();
+	gameLoop();
 	return (EXIT_SUCCESS);
 }
 
-void    Window::handleEvents( void )
+void	Window::handleEvents( void )
 {
-	 while (running)
+	while (SDL_PollEvent(&event))
 	{
-		while (SDL_PollEvent(&event))
+		if ( event.type == SDL_QUIT )
+			running = false;
+		else if ( event.type == SDL_KEYDOWN )
 		{
-			switch(event.type)
+			switch(event.key.keysym.sym)
 			{
-				case SDL_QUIT:
+				case SDLK_ESCAPE:
 					running = false;
 					break;
+				case SDLK_UP:
+					player.setPosY( player.getPosY() - player.getSpeed() );
+					break ;
+				case SDLK_DOWN:
+					player.setPosY( player.getPosY() + player.getSpeed() );
+					break ;
 				default:
 					break;
 			}
 		}
-		SDL_SetRenderDrawColor(renderer, 0, 255, 255, 0);
-		SDL_RenderClear(renderer);
-		SDL_RenderPresent(renderer);
 	}
+}
+
+void    Window::gameLoop( void )
+{
+	 while (running)
+	 {
+		handleEvents();
+		render();
+	}
+}
+
+void	Window::render( void )
+{
+	SDL_RenderClear(renderer);
+	SDL_SetRenderDrawColor(renderer, 0, 255, 255, 255);
+	player.drawRacket( renderer );
+	enemy.drawRacket( renderer );
+	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+	SDL_RenderPresent(renderer);
 }
