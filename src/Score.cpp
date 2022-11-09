@@ -47,6 +47,6 @@ void	Score::displayScore( SDL_Renderer *renderer )
 	}
 	textTexture = SDL_CreateTextureFromSurface( renderer, text );
 	SDL_FreeSurface( text );
-	SDL_Rect dest = { 540, 10, 100, 100 };
+	SDL_Rect dest = { 570, 10, 100, 50 };
 	SDL_RenderCopy( renderer, textTexture, NULL, &dest );
 }
