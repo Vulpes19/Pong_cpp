@@ -6,6 +6,7 @@
 #include <SDL_ttf.h>
 #include "Player.hpp"
 #include "Enemy.hpp"
+#include "Score.hpp"
 
 class Window
 {
@@ -21,6 +22,7 @@ class Window
 		SDL_Renderer	*renderer;
 		Player			player;
 		Enemy			enemy;
+		Score			score;
 		bool			running;
 		SDL_Event		event;
 		unsigned int	width;

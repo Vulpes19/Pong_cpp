@@ -79,6 +79,7 @@ void	Window::render( void )
 	SDL_SetRenderDrawColor(renderer, 0, 255, 255, 255);
 	player.drawRacket( renderer );
 	enemy.drawRacket( renderer );
+	score.displayScore( renderer );
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 	SDL_RenderPresent(renderer);
 }

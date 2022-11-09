@@ -7,13 +7,13 @@ Score::Score( void )
 	enemyScore = 0;
 	text = NULL;
 	textTexture = NULL;
-	color = {10, 0, 0, 0};
+	color = {0, 255, 255, 255};
 	if ( TTF_Init() < 0 )
 	{
 		std::cerr << "Error initializing SDL_ttf: " << TTF_GetError() << std::endl;
 		return ;
 	}
-	font = TTF_OpenFont("font.ttf", 24);
+	font = TTF_OpenFont("/Users/asus/Documents/Pong_cpp/assets/slkscr.ttf", 32);
 	if ( !font )
 	{
 		std::cerr << "Failed to load font: " << TTF_GetError() << std::endl;
@@ -43,6 +43,7 @@ void	Score::displayScore( SDL_Renderer *renderer )
 		return ;
 	}
 	textTexture = SDL_CreateTextureFromSurface( renderer, text );
-	SDL_Rect dest = { 0, 0, text->w, text->h };
-	SDL_RenderCopy( renderer, textTexture, &dest, NULL );
+	SDL_FreeSurface( text );
+	SDL_Rect dest = { 100, 10, 400, 100 };
+	SDL_RenderCopy( renderer, textTexture, NULL, &dest );
 }

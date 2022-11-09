@@ -10,9 +10,8 @@ SRC = $(addprefix src/, $(FILES))
 OBJS = $(SRC:%.c=%.o)
 
 #* FLAGS *#
-FLAGS = -Wall -Wextra -Werror
+FLAGS = #-Wall -Wextra -Werror
 SDL = -lmingw32 -lSDL2main -lSDL2 
-TFF = `sdl2-config --cflags`
 TFFF = `sdl2-config --libs` -lSDL2_ttf 
 
 #* HEADER FILES *#
