@@ -6,7 +6,7 @@ Player::Player( void )
     posX = 10.0f;
     posY = 300.0f;
     score = 0;
-    speed = 27.0f;
+    speed = 30.0f;
 }
 
 Player::~Player( void )

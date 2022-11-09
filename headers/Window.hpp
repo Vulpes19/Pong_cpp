@@ -6,6 +6,7 @@
 #include <SDL_ttf.h>
 #include "Player.hpp"
 #include "Enemy.hpp"
+#include "Ball.hpp"
 #include "Score.hpp"
 
 class Window
@@ -23,6 +24,7 @@ class Window
 		Player			player;
 		Enemy			enemy;
 		Score			score;
+		Ball			ball;
 		bool			running;
 		SDL_Event		event;
 		unsigned int	width;

@@ -31,11 +31,14 @@ Score::~Score( void )
 void	Score::displayScore( SDL_Renderer *renderer )
 {
 	char *str1 = ft_itoa(playerScore);
-	char *str2 = ft_itoa(enemyScore);
-	const char	*toDisplay = strcat( str1, str2 );
+	char *tmp = ft_itoa(enemyScore);
+	char *tmp2 = strdup(" - ");
+	char *str2 = strcat( tmp2, tmp );
+	char	*toDisplay = strcat( str1, str2 );
 
 	free(str1);
-	free(str2);
+	free(tmp);
+	free(tmp2);
 	text = TTF_RenderText_Solid( font, toDisplay, color );
 	if ( !text )
 	{
@@ -44,6 +47,6 @@ void	Score::displayScore( SDL_Renderer *renderer )
 	}
 	textTexture = SDL_CreateTextureFromSurface( renderer, text );
 	SDL_FreeSurface( text );
-	SDL_Rect dest = { 100, 10, 400, 100 };
+	SDL_Rect dest = { 540, 10, 100, 100 };
 	SDL_RenderCopy( renderer, textTexture, NULL, &dest );
 }

@@ -10,7 +10,8 @@ Window::Window( unsigned int w, unsigned int h): width(w), height(h)
 Window::~Window( void )
 {
 	std::cout << "Window is destroyed" << std::endl;
-	SDL_DestroyWindow(window);
+	SDL_DestroyWindow( window );
+	SDL_DestroyRenderer( renderer );
 	SDL_Quit();
 }
 
@@ -21,7 +22,7 @@ int    Window::createWindow( void )
 		std::cerr << "Error: SDL failed to initialize: "<< SDL_GetError() << '\n';
 		return (EXIT_FAILURE);
 	}
-	window = SDL_CreateWindow("TETRIS", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, 0);
+	window = SDL_CreateWindow("PONG", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, 0);
 	if(!window)
 	{
 		std::cerr << "Error: Failed to open window: "<< SDL_GetError() << '\n';
@@ -34,7 +35,6 @@ int    Window::createWindow( void )
 		return (EXIT_FAILURE);
 	}
 	running = true;
-	gameLoop();
 	return (EXIT_SUCCESS);
 }
 
@@ -44,7 +44,7 @@ void	Window::handleEvents( void )
 	{
 		if ( event.type == SDL_QUIT )
 			running = false;
-		else if ( event.type == SDL_KEYDOWN )
+		else if ( event.type == SDL_KEYDOWN)
 		{
 			switch(event.key.keysym.sym)
 			{
@@ -61,6 +61,7 @@ void	Window::handleEvents( void )
 					break;
 			}
 		}
+		render();
 	}
 }
 
@@ -69,7 +70,6 @@ void    Window::gameLoop( void )
 	 while (running)
 	 {
 		handleEvents();
-		render();
 	}
 }
 
@@ -80,6 +80,7 @@ void	Window::render( void )
 	player.drawRacket( renderer );
 	enemy.drawRacket( renderer );
 	score.displayScore( renderer );
-	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+	ball.drawBall( renderer, width, height );
+	SDL_SetRenderDrawColor( renderer, 0, 0, 0, 255 );
 	SDL_RenderPresent(renderer);
 }

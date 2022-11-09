@@ -10,6 +10,7 @@ int main( int ac, char **av )
 	(void)ac;
 	Window	window(1240, 900);
 
-	window.createWindow();
+	if ( window.createWindow() == EXIT_SUCCESS )
+		window.gameLoop();
 	return 0;
 }

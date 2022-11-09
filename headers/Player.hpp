@@ -15,6 +15,7 @@ class Player
         int     getSpeed( void ) { return (speed); };
         void    setPosX( float x ) { posX = x; };
         void    setPosY( float y ) { posY = y; };
+        void    setSpeed( float s) { speed = s; };
     private:
         SDL_Rect    racket;
         unsigned int score;
