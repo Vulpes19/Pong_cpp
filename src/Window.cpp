@@ -2,8 +2,8 @@
 
 Window::Window( unsigned int w, unsigned int h): width(w), height(h)
 {
-	window = NULL;
-	renderer = NULL;
+	window = nullptr;
+	renderer = nullptr;
 	running = false;
 }
 
@@ -51,17 +51,15 @@ void	Window::handleEvents( void )
 				case SDLK_ESCAPE:
 					running = false;
 					break;
-				case SDLK_UP:
-					player.setPosY( player.getPosY() - player.getSpeed() );
-					break ;
-				case SDLK_DOWN:
-					player.setPosY( player.getPosY() + player.getSpeed() );
-					break ;
 				default:
 					break;
 			}
 		}
-		render();
+		const	Uint8	*state = SDL_GetKeyboardState( NULL );
+		if ( state[SDL_SCANCODE_UP] )
+			player.setPosY( player.getPosY() - player.getSpeed() );
+		if ( state[SDL_SCANCODE_DOWN])
+			player.setPosY( player.getPosY() + player.getSpeed() );
 	}
 }
 
@@ -70,17 +68,19 @@ void    Window::gameLoop( void )
 	 while (running)
 	 {
 		handleEvents();
+		render();
+		ball.updateBall( player, enemy, score );
 	}
 }
 
 void	Window::render( void )
 {
 	SDL_RenderClear(renderer);
-	SDL_SetRenderDrawColor(renderer, 0, 255, 255, 255);
+	SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
 	player.drawRacket( renderer );
 	enemy.drawRacket( renderer );
 	score.displayScore( renderer );
-	ball.drawBall( renderer, width, height );
+	ball.drawBall( renderer );
 	SDL_SetRenderDrawColor( renderer, 0, 0, 0, 255 );
 	SDL_RenderPresent(renderer);
 }

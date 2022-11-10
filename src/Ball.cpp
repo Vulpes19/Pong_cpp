@@ -1,12 +1,15 @@
 #include "Ball.hpp"
+#include <tgmath.h>
 
 Ball::Ball( void )
 {
     std::cout << "Ball is created" << std::endl;
     dirX = -1.0f;
     dirY = 0.0f;
+    posX = 620.0f;
+    posY = 420.0f;
     size = 8;
-    speed = 2.0f;
+    speed = 1.0f;
 }
 
 Ball::~Ball( void )
@@ -14,9 +17,52 @@ Ball::~Ball( void )
     std::cout << "Ball is destroyed" << std::endl;
 }
 
-void    Ball::drawBall( SDL_Renderer *renderer, int w, int h )
+void    Ball::drawBall( SDL_Renderer *renderer )
 {
-    _ball = { w / 2, h / 2, 8, 8};
+    int x = static_cast<int>(posX);
+    int y = static_cast<int>(posY);
+
+    _ball = { x, y, 10, 10};
     SDL_RenderDrawRect( renderer, &_ball );
     SDL_RenderFillRect( renderer, &_ball );
+}
+
+void    Ball::updateBall( Player &player,  Enemy &enemy, Score &score )
+{
+    SDL_Rect    playerRacket = player.getRacket();
+    SDL_Rect    enemyRacket = enemy.getRacket();
+    posX += dirX * speed;
+    posY += dirY * speed;
+    if ( SDL_HasIntersection( &playerRacket, &_ball ) )
+    {
+        float changeDir = ((posY - player.getPosY()) / 200) - 0.5f;
+        dirX = fabs(dirX);
+        dirY = changeDir;
+    }
+    if ( SDL_HasIntersection( &enemyRacket, &_ball ) )
+    {
+        float changeDir = ((posY - enemy.getPosY()) / 200) - 0.5f;
+        dirX = -fabs(dirX);
+        dirY = changeDir;
+    }
+    if ( posX < 0 )
+    {
+        score.incrementPlayerScore();
+        posX = 620;
+        posY = 450;
+        dirX = fabs(dirX);
+        dirY = 0.0f;
+    }
+    if ( posX > 1240 )
+    {
+        score.incrementEnemyScore();
+        posX = 620;
+        posY = 450;
+        dirX = -fabs(dirX);
+        dirY = 0.0f;
+    }
+    if ( posY > 900)
+        dirY = -fabs(dirY);
+    if (posY < 0)
+        dirY = fabs(dirY);
 }

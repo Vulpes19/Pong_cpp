@@ -5,9 +5,8 @@ Score::Score( void )
 {
 	playerScore = 0;
 	enemyScore = 0;
-	text = NULL;
-	textTexture = NULL;
 	color = {0, 255, 255, 255};
+	dest = { 570, 10, 100, 50 };
 	if ( TTF_Init() < 0 )
 	{
 		std::cerr << "Error initializing SDL_ttf: " << TTF_GetError() << std::endl;
@@ -35,6 +34,8 @@ void	Score::displayScore( SDL_Renderer *renderer )
 	char *tmp2 = strdup(" - ");
 	char *str2 = strcat( tmp2, tmp );
 	char	*toDisplay = strcat( str1, str2 );
+	SDL_Surface	*text = nullptr;
+	textTexture = nullptr;
 
 	free(str1);
 	free(tmp);
@@ -47,6 +48,6 @@ void	Score::displayScore( SDL_Renderer *renderer )
 	}
 	textTexture = SDL_CreateTextureFromSurface( renderer, text );
 	SDL_FreeSurface( text );
-	SDL_Rect dest = { 570, 10, 100, 50 };
 	SDL_RenderCopy( renderer, textTexture, NULL, &dest );
+	SDL_DestroyTexture( textTexture );
 }

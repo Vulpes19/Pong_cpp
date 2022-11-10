@@ -13,15 +13,15 @@ class Score
 		Score( void );
 		~Score( void );
 		void	displayScore( SDL_Renderer* );
-		void	setPlayerScore( unsigned int p ) { playerScore = p; };
-		void	setEnemyScore( unsigned int	e ) { enemyScore = e; };
+		void	incrementPlayerScore( void ) { playerScore++; };
+		void	incrementEnemyScore( void ) { enemyScore++; };
 	private:
 		unsigned int playerScore;
 		unsigned int enemyScore;
 		TTF_Font	*font;
 		SDL_Color	color;
-		SDL_Surface	*text;
 		SDL_Texture	*textTexture;
+		SDL_Rect dest;
 };
 
 #endif

@@ -13,6 +13,7 @@ class   Enemy
         float   getPosX( void ) { return (posX); };
         float   getPosY( void ) { return (posY); };
         int     getSpeed( void ) { return (speed); };
+        SDL_Rect getRacket( void )  { return (racket); };
         void    setPosX( float x ) { posX = x; };
         void    setPosY( float y ) { posY = y; };
     private:
