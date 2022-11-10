@@ -2,17 +2,18 @@
 TARGET = pong
 
 #*SOURCE FILES *#
-FILES = main.cpp Window.cpp Player.cpp Ball.cpp Enemy.cpp Score.cpp itoa.c
+FILES = main.cpp Window.cpp Player.cpp Ball.cpp Enemy.cpp Score.cpp itoa.cpp
 		
 SRC = $(addprefix src/, $(FILES))
 
 #* OBJECT FILES *#
-OBJS = $(SRC:%.c=%.o)
+OBJS = $(SRC:%.cpp=%.o)
 
 #* FLAGS *#
 FLAGS = #-Wall -Wextra -Werror
 SDL = -lmingw32 -lSDL2main -lSDL2 
-TFFF = `sdl2-config --libs` -lSDL2_ttf 
+TTF = -lSDL2_ttf 
+IMG = -lSDL2_image
 
 #* HEADER FILES *#
 SDL_INCLUDE = include/
@@ -25,11 +26,11 @@ DEL = rm -f
 
 all: $(TARGET)
 
-%.o: %.c
-	g++ $(FLAGS) -c -I $(INCLUDE) -I $(SDL_INCLUDE) -L $(LIB) $(TFFF) $(SDL) $< -o $@
+%.o: %.cpp
+	g++ $(FLAGS) -c -I $(INCLUDE) -I $(SDL_INCLUDE) -L $(LIB) $(IMG) $(TTF) $(SDL) $< -o $@
 
 $(TARGET): $(OBJS) $(INCLUDE)
-	g++ $(FLAGS) -I $(INCLUDE) -I $(SDL_INCLUDE) -L $(LIB) $(OBJS) $(TFFF) $(SDL) -o $(TARGET)
+	g++ $(FLAGS) -I $(INCLUDE) -I $(SDL_INCLUDE) -L $(LIB) $(OBJS) $(IMG) $(TTF) $(SDL) -o $(TARGET)
 
 re: fclean all
 

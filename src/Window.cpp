@@ -34,6 +34,9 @@ int    Window::createWindow( void )
 		std::cerr << "Error: Failed to create renderer: "<< SDL_GetError() << '\n';
 		return (EXIT_FAILURE);
 	}
+	SDL_Surface	*icon = IMG_Load("/Users/asus/Documents/Pong_cpp/assets/pong icon.png");
+	SDL_SetWindowIcon( window, icon);
+	SDL_FreeSurface( icon );
 	running = true;
 	return (EXIT_SUCCESS);
 }

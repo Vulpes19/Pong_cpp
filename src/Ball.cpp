@@ -42,12 +42,12 @@ void    Ball::updateBall( Player &player,  Enemy &enemy, Score &score )
     if ( SDL_HasIntersection( &enemyRacket, &_ball ) )
     {
         float changeDir = ((posY - enemy.getPosY()) / 200) - 0.5f;
-        dirX = -fabs(dirX);
+        dirX = -fabs(dirX); //absolute value forced to be negative
         dirY = changeDir;
     }
     if ( posX < 0 )
     {
-        score.incrementPlayerScore();
+        score.incrementEnemyScore();
         posX = 620;
         posY = 450;
         dirX = fabs(dirX);
@@ -55,7 +55,7 @@ void    Ball::updateBall( Player &player,  Enemy &enemy, Score &score )
     }
     if ( posX > 1240 )
     {
-        score.incrementEnemyScore();
+        score.incrementPlayerScore();
         posX = 620;
         posY = 450;
         dirX = -fabs(dirX);

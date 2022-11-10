@@ -4,6 +4,7 @@
 #include <iostream>
 #include <SDL.h>
 #include <SDL_ttf.h>
+#include <SDL_image.h>
 #include "Player.hpp"
 #include "Enemy.hpp"
 #include "Ball.hpp"

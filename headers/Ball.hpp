@@ -7,13 +7,15 @@
 #include "Enemy.hpp"
 #include "Score.hpp"
 
+/* Ball Class */
+
 class Ball
 {
 	public:
 		Ball( void );
 		~Ball( void );
-		void	drawBall( SDL_Renderer* );
-		void	updateBall( Player&, Enemy&, Score& );
+		void	drawBall( SDL_Renderer* ); //displays the ball on the screen
+		void	updateBall( Player&, Enemy&, Score& ); //checks for collision and updates x and y axis
 	private:
 		float	posX;
 		float	posY;
