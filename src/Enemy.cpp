@@ -1,4 +1,5 @@
 #include "Enemy.hpp"
+#include "Ball.hpp"
 
 Enemy::Enemy( void )
 {
@@ -23,4 +24,12 @@ void    Enemy::drawRacket( SDL_Renderer *renderer )
 
     SDL_RenderDrawRect( renderer, &racket );
     SDL_RenderFillRect( renderer, &racket );
+}
+
+void    Enemy::updateAI( Ball &ball )
+{
+    if ( ball.getPosY() > posY && ball.getPosX() > 620)
+        posY += speed;
+    if ( ball.getPosY() < posY && ball.getPosX() > 620)
+        posY -= speed;
 }

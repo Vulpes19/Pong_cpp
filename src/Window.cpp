@@ -72,6 +72,7 @@ void    Window::gameLoop( void )
 	 {
 		handleEvents();
 		render();
+		enemy.updateAI( ball );
 		ball.updateBall( player, enemy, score );
 	}
 }

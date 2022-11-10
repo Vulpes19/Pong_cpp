@@ -16,6 +16,8 @@ class Ball
 		~Ball( void );
 		void	drawBall( SDL_Renderer* ); //displays the ball on the screen
 		void	updateBall( Player&, Enemy&, Score& ); //checks for collision and updates x and y axis
+		float	getPosX( void ) { return (posX); };
+		float	getPosY( void ) { return (posY); };
 	private:
 		float	posX;
 		float	posY;

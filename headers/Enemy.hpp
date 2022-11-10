@@ -4,12 +4,14 @@
 #include <iostream>
 #include <SDL.h>
 
+class Ball;
 class   Enemy
 {
 	public:
         Enemy( void );
         ~Enemy( void );
         void    drawRacket( SDL_Renderer *renderer );
+        void    updateAI( Ball& );
         float   getPosX( void ) { return (posX); };
         float   getPosY( void ) { return (posY); };
         int     getSpeed( void ) { return (speed); };
