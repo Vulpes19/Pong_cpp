@@ -9,6 +9,7 @@
 #include "Enemy.hpp"
 #include "Ball.hpp"
 #include "Score.hpp"
+#include "Menu.hpp"
 
 class Window
 {
@@ -19,14 +20,17 @@ class Window
 		void	handleEvents( void );
 		void	gameLoop( void );
 		void	render( void );
+		void	startMenu( void );
 	private:
 		SDL_Window		*window;
 		SDL_Renderer	*renderer;
+		Menu			menu;
 		Player			player;
 		Enemy			enemy;
 		Score			score;
 		Ball			ball;
 		bool			running;
+		bool			play;
 		SDL_Event		event;
 		unsigned int	width;
 		unsigned int	height;

@@ -4,7 +4,8 @@ Window::Window( unsigned int w, unsigned int h): width(w), height(h)
 {
 	window = nullptr;
 	renderer = nullptr;
-	running = false;
+	running = true;
+	play = true;
 }
 
 Window::~Window( void )
@@ -37,7 +38,6 @@ int    Window::createWindow( void )
 	SDL_Surface	*icon = IMG_Load("/Users/asus/Documents/Pong_cpp/assets/pong icon.png");
 	SDL_SetWindowIcon( window, icon);
 	SDL_FreeSurface( icon );
-	running = true;
 	return (EXIT_SUCCESS);
 }
 
@@ -52,7 +52,7 @@ void	Window::handleEvents( void )
 			switch(event.key.keysym.sym)
 			{
 				case SDLK_ESCAPE:
-					running = false;
+					play = true;
 					break;
 				default:
 					break;
@@ -68,8 +68,18 @@ void	Window::handleEvents( void )
 
 void    Window::gameLoop( void )
 {
-	 while (running)
+	 while ( running )
 	 {
+		while ( play )
+		{
+			menu.renderMenu( renderer );
+			menu.mouseEvents( running, play);
+		}
+		if ( !running || (!running && !play))
+		{
+			exit;
+			break ;
+		}
 		handleEvents();
 		render();
 		enemy.updateAI( ball );
