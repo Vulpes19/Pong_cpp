@@ -28,14 +28,12 @@ void    Enemy::drawRacket( SDL_Renderer *renderer )
 
 void    Enemy::updateAI( Ball &ball )
 {
-    if ( ball.getPosY() > posY && ball.getPosX() > 620)
-    {
-        posY += speed;
-        return ;
-    }
-    else if ( ball.getPosY() < posY && ball.getPosX() > 620)
-    {
-        posY -= speed;
-        return ;
-    }
+    if ( posY > 700 )
+        posY = 700;
+    if ( posY < 0 )
+        posY = 0;
+    if ( ball.getPosY() > posY + 100 )
+        posY++;
+    else if ( ball.getPosY() < posY + 100)
+        posY--;
 }

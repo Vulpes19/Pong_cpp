@@ -15,6 +15,7 @@ public:
     void    writeText( SDL_Renderer*, const char*);
     void    mouseEvents( bool &, bool & );
     void    renderMenu( SDL_Renderer* );
+    void    freeMenu( void );
 private:
     TTF_Font	*font;
 	SDL_Color	color;

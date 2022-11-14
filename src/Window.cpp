@@ -52,8 +52,11 @@ void	Window::handleEvents( void )
 			switch(event.key.keysym.sym)
 			{
 				case SDLK_ESCAPE:
+				{
 					play = true;
-					break;
+					running = true;
+					return ;
+				}
 				default:
 					break;
 			}
@@ -75,15 +78,16 @@ void    Window::gameLoop( void )
 			menu.renderMenu( renderer );
 			menu.mouseEvents( running, play);
 		}
-		if ( !running || (!running && !play))
-		{
-			exit;
+		if ( !running || (!running && !play) )
 			break ;
-		}
 		handleEvents();
+		if ( !running )
+			break ;
+		if ( play == true )
+			continue ;
 		render();
-		enemy.updateAI( ball );
 		ball.updateBall( player, enemy, score );
+		enemy.updateAI( ball );
 	}
 }
 
