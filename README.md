@@ -7,7 +7,7 @@ In order to learn video games programming using C++, I decided to program some s
 For Windows to run this game you need [MinGW](https://www.google.com/search?client=firefox-b-d&q=Mingw) installed. Just clone the repo and type `mingw32-make.exe` and run `pong.exe`.
 
 ## Controls
-&#8593 arrow to go up
-&#8595 arrow to go down
-&#80; to pause the game
- to exit the game
+&#8593 arrow to go up  <br />
+&#8595 arrow to go down  <br />
+&#80; to pause the game  <br />
+ to exit the game  <br />
