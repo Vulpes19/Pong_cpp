@@ -2,7 +2,7 @@
 TARGET = pong
 
 #*SOURCE FILES *#
-FILES = main.cpp Window.cpp Player.cpp Ball.cpp Enemy.cpp Score.cpp itoa.cpp Menu.cpp
+FILES = main.cpp Window.cpp Player.cpp Ball.cpp Enemy.cpp Score.cpp itoa.cpp Menu.cpp Pause.cpp
 		
 SRC = $(addprefix src/, $(FILES))
 

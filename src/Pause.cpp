@@ -1,11 +1,9 @@
-#include "Menu.hpp"
+#include "Pause.hpp"
 
-Menu::Menu( void )
+Pause::Pause( void )
 {
-    std::cout << "Menu is created" << std::endl;
+    hover = false;
 	color = {0, 255, 255, 255};
-    hover_play = false;
-    hover_exit = false;
     if ( TTF_Init() < 0 )
 	{
 		std::cerr << "Error initializing SDL_ttf: " << TTF_GetError() << std::endl;
@@ -19,14 +17,13 @@ Menu::Menu( void )
 	}
 }
 
-Menu::~Menu( void )
+Pause::~Pause( void )
 {
-    std::cout << "Menu is destroyed" << std::endl;
     TTF_CloseFont( font );
 	TTF_Quit();
 }
 
-void    Menu::writeText( SDL_Renderer *renderer, const char *toDisplay )
+void    Pause::writeText( SDL_Renderer *renderer, const char *toDisplay )
 {
 	SDL_Surface	*text = nullptr;
     textTexture = nullptr;
@@ -43,7 +40,7 @@ void    Menu::writeText( SDL_Renderer *renderer, const char *toDisplay )
 	SDL_DestroyTexture( textTexture );
 }
 
-void    Menu::mouseEvents( bool &running, bool &menu )
+void    Pause::pauseEvents( bool &running, bool &pause )
 {
     SDL_Event		event;
 
@@ -52,7 +49,7 @@ void    Menu::mouseEvents( bool &running, bool &menu )
 		if ( event.type == SDL_QUIT )
         {
 			running = false;
-            menu = false;
+            pause = false;
         }
         if ( event.type == SDL_MOUSEMOTION || event.type == SDL_MOUSEBUTTONDOWN)
         {
@@ -60,50 +57,33 @@ void    Menu::mouseEvents( bool &running, bool &menu )
             SDL_GetMouseState( &x, &y );
             if ( x < 670 && x > 570 && y > 550 && y < 600 )
             {
-                hover_play = true;
+                hover = true;
                 if ( event.type == SDL_MOUSEBUTTONDOWN )
                 {
                     running = true;
-                    menu = false;
+                    pause = false;
                 }
             }
             else
-                hover_play = false;
-            if ( x < 670 && x > 570 && y > 650 && y < 700 )
-            { 
-                hover_exit = true;
-                if ( event.type == SDL_MOUSEBUTTONDOWN )
-                {
-                    running = false;
-                    menu = false;
-                }
-            }
-            else
-                hover_exit = false;
+                hover = false;
         }
     }
 		
 }
 
-void    Menu::renderMenu( SDL_Renderer *renderer )
+void    Pause::renderMenu( SDL_Renderer *renderer )
 {
     SDL_RenderClear(renderer);
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
 	color = {0, 255, 255, 255};
     dest = { 300, 200, 600, 150};
     writeText(renderer, "Ayman's PONG");
-    if ( hover_play )
+    if ( hover )
         color = {255, 255, 255, 255};
     else
 	    color = {0, 255, 255, 255};
 	dest = { 570, 550, 100, 50 };
-    writeText(renderer, "PLAY");
-     if ( hover_exit )
-        color = {255, 255, 255, 255};
-    else
-	    color = {0, 255, 255, 255};
-	dest = { 570, 650, 100, 50 };
-    writeText(renderer, "EXIT");
+    writeText(renderer, "RESUME");
 	SDL_SetRenderDrawColor( renderer, 0, 0, 0, 255 );
 	SDL_RenderPresent(renderer);
 }

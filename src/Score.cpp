@@ -29,10 +29,10 @@ Score::~Score( void )
 
 void	Score::displayScore( SDL_Renderer *renderer )
 {
-	char *str1 = ft_itoa(playerScore);
-	char *tmp = ft_itoa(enemyScore);
-	char *tmp2 = strdup(" - ");
-	char *str2 = strcat( tmp2, tmp );
+	char 	*str1 = ft_itoa(playerScore);
+	char 	*tmp = ft_itoa(enemyScore);
+	char 	*tmp2 = strdup(" - ");
+	char 	*str2 = strcat( tmp2, tmp );
 	char	*toDisplay = strcat( str1, str2 );
 	SDL_Surface	*text = nullptr;
 	textTexture = nullptr;

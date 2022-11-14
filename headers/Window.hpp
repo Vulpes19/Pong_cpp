@@ -10,6 +10,7 @@
 #include "Ball.hpp"
 #include "Score.hpp"
 #include "Menu.hpp"
+#include "Pause.hpp"
 
 class Window
 {
@@ -24,13 +25,15 @@ class Window
 	private:
 		SDL_Window		*window;
 		SDL_Renderer	*renderer;
-		Menu			menu;
-		Player			player;
-		Enemy			enemy;
-		Score			score;
-		Ball			ball;
+		Menu			*menu;
+		Player			*player;
+		Enemy			*enemy;
+		Score			*score;
+		Ball			*ball;
+		Pause			*pauseMenu;
 		bool			running;
 		bool			play;
+		bool			pause;
 		SDL_Event		event;
 		unsigned int	width;
 		unsigned int	height;

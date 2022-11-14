@@ -4,13 +4,26 @@ Window::Window( unsigned int w, unsigned int h): width(w), height(h)
 {
 	window = nullptr;
 	renderer = nullptr;
-	running = true;
+	running = false;
 	play = true;
+	pause = false;
+	menu = new Menu;
+	player = new Player;
+	enemy = new Enemy;
+	score = new Score;
+	ball = new Ball;
+	pauseMenu = new Pause;
 }
 
 Window::~Window( void )
 {
 	std::cout << "Window is destroyed" << std::endl;
+	delete menu;
+	delete player;
+	delete enemy;
+	delete score;
+	delete ball;
+	delete pauseMenu;
 	SDL_DestroyWindow( window );
 	SDL_DestroyRenderer( renderer );
 	SDL_Quit();
@@ -53,8 +66,12 @@ void	Window::handleEvents( void )
 			{
 				case SDLK_ESCAPE:
 				{
-					play = true;
-					running = true;
+					running = false;
+					return ;
+				}
+				case SDLK_p:
+				{
+					pause = true;
 					return ;
 				}
 				default:
@@ -63,31 +80,34 @@ void	Window::handleEvents( void )
 		}
 		const	Uint8	*state = SDL_GetKeyboardState( NULL );
 		if ( state[SDL_SCANCODE_UP] )
-			player.setPosY( player.getPosY() - player.getSpeed() );
+			player->setPosY( player->getPosY() - player->getSpeed() );
 		if ( state[SDL_SCANCODE_DOWN])
-			player.setPosY( player.getPosY() + player.getSpeed() );
+			player->setPosY( player->getPosY() + player->getSpeed() );
 	}
 }
 
 void    Window::gameLoop( void )
 {
+	while ( play )
+	{
+		menu->renderMenu( renderer );
+		menu->mouseEvents( running, play);
+	}
 	 while ( running )
 	 {
-		while ( play )
+		while ( pause )
 		{
-			menu.renderMenu( renderer );
-			menu.mouseEvents( running, play);
+			pauseMenu->renderMenu( renderer );
+			pauseMenu->pauseEvents( running, pause );
 		}
-		if ( !running || (!running && !play) )
+		if ( running == false )
 			break ;
 		handleEvents();
-		if ( !running )
+		if ( running == false )
 			break ;
-		if ( play == true )
-			continue ;
 		render();
-		ball.updateBall( player, enemy, score );
-		enemy.updateAI( ball );
+		ball->updateBall( *player, *enemy, *score );
+		enemy->updateAI( *ball );
 	}
 }
 
@@ -95,10 +115,10 @@ void	Window::render( void )
 {
 	SDL_RenderClear(renderer);
 	SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
-	player.drawRacket( renderer );
-	enemy.drawRacket( renderer );
-	score.displayScore( renderer );
-	ball.drawBall( renderer );
+	player->drawRacket( renderer );
+	enemy->drawRacket( renderer );
+	score->displayScore( renderer );
+	ball->drawBall( renderer );
 	SDL_SetRenderDrawColor( renderer, 0, 0, 0, 255 );
 	SDL_RenderPresent(renderer);
 }

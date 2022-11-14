@@ -32,8 +32,8 @@ void    Enemy::updateAI( Ball &ball )
         posY = 700;
     if ( posY < 0 )
         posY = 0;
-    if ( ball.getPosY() > posY + 100 )
+    if ( ball.getPosY() > posY + 100 && rand() % 2 == 0)
         posY++;
-    else if ( ball.getPosY() < posY + 100)
+    else if ( ball.getPosY() < posY + 100 && rand() % 2 == 0)
         posY--;
 }
