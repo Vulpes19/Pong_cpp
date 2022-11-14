@@ -3,7 +3,6 @@
 
 Ball::Ball( void )
 {
-    std::cout << "Ball is created" << std::endl;
     dirX = -1.0f;
     dirY = 0.0f;
     posX = 620.0f;
@@ -14,7 +13,6 @@ Ball::Ball( void )
 
 Ball::~Ball( void )
 {
-    std::cout << "Ball is destroyed" << std::endl;
 }
 
 void    Ball::drawBall( SDL_Renderer *renderer )

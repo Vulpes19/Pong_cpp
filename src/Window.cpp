@@ -17,7 +17,6 @@ Window::Window( unsigned int w, unsigned int h): width(w), height(h)
 
 Window::~Window( void )
 {
-	std::cout << "Window is destroyed" << std::endl;
 	delete menu;
 	delete player;
 	delete enemy;
@@ -31,12 +30,17 @@ Window::~Window( void )
 
 int    Window::createWindow( void )
 {
+	std::cout << "** CONTROLS **" << std::endl;
+	std::cout << "up arrow to go up" << std::endl;
+	std::cout << "down arrow to go down" << std::endl;
+	std::cout << "P to pause the game" << std::endl;
+	std::cout << "ESC to exit game" << std::endl;
 	if(SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
 		std::cerr << "Error: SDL failed to initialize: "<< SDL_GetError() << '\n';
 		return (EXIT_FAILURE);
 	}
-	window = SDL_CreateWindow("PONG", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, 0);
+	window = SDL_CreateWindow("Ayman's PONG", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, 0);
 	if(!window)
 	{
 		std::cerr << "Error: Failed to open window: "<< SDL_GetError() << '\n';

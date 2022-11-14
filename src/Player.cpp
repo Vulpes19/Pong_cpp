@@ -2,7 +2,6 @@
 
 Player::Player( void )
 {
-    std::cout << "Player is created" << std::endl;
     posX = 10.0f;
     posY = 300.0f;
     score = 0;
@@ -11,7 +10,6 @@ Player::Player( void )
 
 Player::~Player( void )
 {
-    std::cout << "Player is destoryed" << std::endl;
 }
 
 void    Player::drawRacket( SDL_Renderer *renderer )

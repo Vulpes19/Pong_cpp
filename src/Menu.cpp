@@ -2,7 +2,6 @@
 
 Menu::Menu( void )
 {
-    std::cout << "Menu is created" << std::endl;
 	color = {0, 255, 255, 255};
     hover_play = false;
     hover_exit = false;
@@ -21,7 +20,6 @@ Menu::Menu( void )
 
 Menu::~Menu( void )
 {
-    std::cout << "Menu is destroyed" << std::endl;
     TTF_CloseFont( font );
 	TTF_Quit();
 }

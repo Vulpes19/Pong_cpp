@@ -3,7 +3,6 @@
 
 Enemy::Enemy( void )
 {
-    std::cout << "Enemy is created" << std::endl;
     posX = 1190.0f;
     posY = 300.0f;
     score = 0;
@@ -12,7 +11,6 @@ Enemy::Enemy( void )
 
 Enemy::~Enemy( void )
 {
-    std::cout << "Player is destoryed" << std::endl;
 }
 
 void    Enemy::drawRacket( SDL_Renderer *renderer )

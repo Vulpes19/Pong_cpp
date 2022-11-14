@@ -22,7 +22,6 @@ Score::Score( void )
 
 Score::~Score( void )
 {
-	std::cout << "Score is destroyed" << std::endl;
 	TTF_CloseFont( font );
 	TTF_Quit();
 }
